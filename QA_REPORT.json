@@ -1,0 +1,15 @@
+{
+  "premium_hero": true,
+  "student_progress": true,
+  "mobile_navigation": true,
+  "motion_reduced_support": true,
+  "seo_pages": true,
+  "robots": true,
+  "sitemap": true,
+  "schema": true,
+  "og_image": true,
+  "webp_assets": 14,
+  "github_pages_workflow": true,
+  "single_main_h1": true,
+  "no_fake_contacts": true
+}
