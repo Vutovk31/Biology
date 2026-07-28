@@ -1,8 +1,10 @@
 (() => {
-  const premiumStyles = document.createElement("link");
-  premiumStyles.rel = "stylesheet";
-  premiumStyles.href = "premium-overrides.css";
-  document.head.appendChild(premiumStyles);
+  ["premium-overrides.css", "premium.css"].forEach(href => {
+    const stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = href;
+    document.head.appendChild(stylesheet);
+  });
 
   const storage = {
     get(key, fallback) {
@@ -150,6 +152,11 @@
 
     sections.forEach(section => sectionObserver.observe(section));
   }
+
+  const header = document.querySelector(".header");
+  const syncHeaderState = () => header?.classList.toggle("scrolled", window.scrollY > 18);
+  syncHeaderState();
+  window.addEventListener("scroll", syncHeaderState, { passive: true });
 
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener("click", () => {
