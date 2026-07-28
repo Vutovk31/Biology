@@ -1,4 +1,9 @@
 (() => {
+  const premiumStyles = document.createElement("link");
+  premiumStyles.rel = "stylesheet";
+  premiumStyles.href = "premium-overrides.css";
+  document.head.appendChild(premiumStyles);
+
   const storage = {
     get(key, fallback) {
       try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
