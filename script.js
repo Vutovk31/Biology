@@ -6,6 +6,22 @@
     document.head.appendChild(stylesheet);
   });
 
+  const roadmapStyle = document.createElement("style");
+  roadmapStyle.textContent = `
+    .progress{overflow:hidden;background:linear-gradient(180deg,#f7f1e4 0%,#f1eadc 100%)}
+    .progress-line{counter-reset:step;gap:18px}
+    .progress-line::before{top:34px;height:2px;background:linear-gradient(90deg,var(--forest),var(--gold),var(--forest-2));opacity:.35}
+    .progress-line article{counter-increment:step;min-height:250px;padding:88px 22px 24px;border:1px solid rgba(23,63,53,.1);border-radius:24px;background:rgba(255,255,255,.62);box-shadow:0 16px 44px rgba(18,33,28,.06);backdrop-filter:blur(12px);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
+    .progress-line article::after{content:"0" counter(step);position:absolute;right:18px;bottom:10px;font-size:58px;line-height:1;font-weight:900;letter-spacing:-.08em;color:rgba(23,63,53,.055)}
+    .progress-line article>span{top:6px;left:20px;border:1px solid rgba(255,255,255,.6);background:linear-gradient(145deg,var(--forest),var(--forest-2))}
+    .progress-line h3{font-size:21px;margin-bottom:12px}.progress-line p{font-size:14px;line-height:1.65;margin:0;color:#5c6c66}
+    .progress-line article:hover{transform:translateY(-8px);border-color:rgba(23,63,53,.2);box-shadow:0 28px 70px rgba(18,33,28,.12)}
+    @media(max-width:960px){.progress-line{grid-template-columns:repeat(2,1fr)}.progress-line::before{display:none}.progress-line article:last-child{grid-column:1/-1;max-width:calc(50% - 9px)}}
+    @media(max-width:720px){.progress-line{grid-template-columns:1fr;gap:14px;padding-left:18px}.progress-line::before{display:block;left:46px;right:auto;top:18px;bottom:18px;width:2px;height:auto}.progress-line article,.progress-line article:last-child{grid-column:auto;max-width:none;min-height:auto;padding:24px 20px 24px 78px}.progress-line article>span{top:22px;left:-1px;width:50px;height:50px}.progress-line article::after{font-size:44px}.progress-line article:hover{transform:none}}
+    @media(prefers-reduced-motion:reduce){.progress-line article{transition:none!important;transform:none!important}}
+  `;
+  document.head.appendChild(roadmapStyle);
+
   const storage = {
     get(key, fallback) {
       try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
@@ -13,7 +29,7 @@
     },
     set(key, value) {
       try { localStorage.setItem(key, JSON.stringify(value)); }
-      catch { /* localStorage can be blocked in private mode */ }
+      catch { }
     }
   };
 
