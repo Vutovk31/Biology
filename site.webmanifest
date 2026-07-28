@@ -1,0 +1,15 @@
+{
+  "name": "Биология с Князевой Елизаветой Сергеевной",
+  "short_name": "БИО",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fbfaf7",
+  "theme_color": "#173f35",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
