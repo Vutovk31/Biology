@@ -52,6 +52,19 @@
 .result-row{min-height:82px;padding:23px 24px;border-radius:21px;grid-template-columns:72px minmax(0,1fr) 112px 24px}
 .result-row strong{font-size:24px}
 
+/* Premium roadmap: makes the preparation process feel like a guided product journey. */
+.progress{position:relative;overflow:hidden;background:linear-gradient(135deg,#f4efe3 0%,#edf4ee 100%)}
+.progress::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;right:-250px;top:-260px;background:radial-gradient(circle,rgba(217,180,94,.2),rgba(217,180,94,0) 68%);pointer-events:none}
+.progress .section-head{position:relative;z-index:1}
+.progress-line{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;counter-reset:roadmap}
+.progress-line::before{left:42px;right:42px;top:38px;height:2px;background:linear-gradient(90deg,var(--forest),rgba(23,63,53,.14));border-radius:999px}
+.progress-line article{counter-increment:roadmap;min-height:260px;padding:92px 24px 26px;border:1px solid rgba(23,63,53,.09);border-radius:26px;background:rgba(255,255,255,.72);box-shadow:0 20px 50px rgba(23,63,53,.08);backdrop-filter:blur(12px);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
+.progress-line article:hover{transform:translateY(-8px);border-color:rgba(23,63,53,.22);box-shadow:0 28px 64px rgba(23,63,53,.13)}
+.progress-line article>span{top:16px;left:24px;width:48px;height:48px;border-radius:16px;background:var(--forest);box-shadow:0 10px 24px rgba(23,63,53,.22)}
+.progress-line article::after{content:"0" counter(roadmap);position:absolute;top:22px;right:22px;color:rgba(23,63,53,.18);font-weight:900;font-size:13px;letter-spacing:.12em}
+.progress-line h3{font-size:22px;margin-bottom:13px}
+.progress-line p{font-size:15px;line-height:1.65;margin:0;color:#61706a}
+
 .credential-showcase{gap:22px}
 .credential-main{min-height:590px;border-radius:34px}
 .credential-side{gap:22px}
@@ -63,10 +76,18 @@
 .price-card{padding:34px;border-radius:28px}
 .review-card{padding:31px;border-radius:28px}
 
+/* Cohesive focus and pressed states for keyboard and touch users. */
+.button,.nav-cta,.text-button,.result-row,.score-rail button,.credential-main,.credential-small,.material-card,.review-card{outline:none}
+.button:focus-visible,.nav-cta:focus-visible,.text-button:focus-visible,.result-row:focus-visible,.score-rail button:focus-visible,.credential-main:focus-visible,.credential-small:focus-visible,.material-card:focus-visible,.review-card:focus-visible,.menu-button:focus-visible{box-shadow:0 0 0 4px rgba(217,180,94,.42),0 0 0 7px rgba(23,63,53,.14)}
+.button:active,.nav-cta:active,.result-row:active,.score-rail button:active,.credential-main:active,.credential-small:active{transform:translateY(1px) scale(.985)}
+
 @media(max-width:1080px){
   .hero-grid{grid-template-columns:1fr .86fr;gap:46px}
   .hero-copy h1{font-size:clamp(54px,7vw,78px)}
   .score-rail button{width:78px}
+  .progress-line{grid-template-columns:repeat(3,1fr)}
+  .progress-line::before{display:none}
+  .progress-line article:nth-child(4),.progress-line article:nth-child(5){grid-column:span 1}
 }
 
 @media(max-width:960px){
@@ -110,6 +131,10 @@
   .result-feature>strong{font-size:104px}
   .result-row{grid-template-columns:54px minmax(0,1fr) auto;padding:19px 17px;gap:10px}
   .result-row b{grid-column:2}.result-row i{grid-column:3;grid-row:1/3}
+  .progress-line{grid-template-columns:1fr;gap:14px}
+  .progress-line article{min-height:auto;padding:28px 24px 28px 92px}
+  .progress-line article>span{top:24px;left:24px}
+  .progress-line article::after{display:none}
   .credential-showcase{grid-template-columns:1fr}
   .credential-main{min-height:500px}
   .price-grid,.review-wall{grid-template-columns:1fr}
@@ -124,8 +149,10 @@
   .portrait-placeholder span{font-size:84px}
   .score-rail button{height:72px}
   .credential-main{min-height:440px}
+  .progress-line article{padding:24px 20px 24px 82px}
+  .progress-line article>span{left:20px;top:20px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .pain-grid article,.result-row,.credential-main,.credential-small,.price-card,.review-card{transition:none!important}
+  .pain-grid article,.result-row,.credential-main,.credential-small,.price-card,.review-card,.progress-line article{transition:none!important}
 }
