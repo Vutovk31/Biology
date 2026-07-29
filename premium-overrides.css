@@ -1,4 +1,3 @@
 @import url("premium-composition.css");
 @import url("premium-hero.css");
-
-/* Layer entry point. Detailed visual rules live in focused modules to keep the cascade predictable. */
+@import url("premium-navigation.css");
