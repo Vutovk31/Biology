@@ -1,0 +1,131 @@
+/* Premium composition pass: typography, hero balance, evidence cards and mobile hierarchy. */
+:root{
+  --content-max:1240px;
+  --display-tracking:-.058em;
+  --card-border:rgba(23,63,53,.10);
+}
+
+.container{width:min(var(--content-max),calc(100% - 48px))}
+.nav{min-height:82px}
+.brand{font-size:15px}
+.brand-mark{width:46px;height:46px;border-radius:16px}
+
+.hero{padding:112px 0 86px;min-height:820px}
+.hero-grid{grid-template-columns:minmax(0,1.14fr) minmax(430px,.86fr);gap:clamp(54px,6vw,92px)}
+.hero-copy h1{font-size:clamp(58px,6.55vw,96px);line-height:.92;letter-spacing:var(--display-tracking);margin:20px 0 30px}
+.hero-lead{font-size:clamp(19px,1.55vw,22px);max-width:690px;color:#5b6964}
+.trust-tags{gap:9px;margin:30px 0 32px}
+.trust-tags span{min-height:42px;display:inline-flex;align-items:center;padding:9px 14px}
+.actions{gap:18px}
+.button{min-height:58px;padding:0 25px;border-radius:17px}
+.text-button{display:inline-flex;align-items:center;min-height:48px}
+.disclaimer{max-width:650px;line-height:1.5}
+
+.hero-stage{min-height:600px}
+.portrait-card{inset:0 34px 36px 0;border-radius:42px}
+.portrait-card::after{inset:22px;border-radius:31px}
+.portrait-placeholder span{font-size:110px;letter-spacing:-.08em}
+.portrait-placeholder strong{font-size:18px}
+.portrait-badge{padding:15px 17px;border-radius:17px}
+.portrait-badge-top{top:34px;right:1px}
+.portrait-badge-bottom{left:-26px;bottom:88px}
+.score-rail{right:-8px;gap:10px}
+.score-rail button{width:88px;height:92px;border-radius:21px}
+.score-rail strong{font-size:30px;letter-spacing:-.04em}
+
+.section{padding:124px 0}
+.section-head{max-width:900px;margin-bottom:52px}
+.section-head h2{font-size:clamp(42px,4.8vw,68px);line-height:.98;letter-spacing:-.052em}
+.section-head>p:last-child{max-width:720px;line-height:1.7}
+
+.pain-grid{gap:20px}
+.pain-grid article{min-height:280px;padding:34px;display:flex;flex-direction:column}
+.pain-grid article h3{font-size:28px;margin:34px 0 14px}
+.pain-grid article p{font-size:16px;line-height:1.7}
+.pain-grid article a{margin-top:auto;padding-top:24px}
+
+.results-layout{grid-template-columns:minmax(360px,.86fr) minmax(0,1.14fr);gap:28px}
+.result-feature{min-height:510px;padding:38px;border-radius:34px}
+.result-feature>strong{font-size:152px}
+.result-feature h3{font-size:34px}
+.result-stack{gap:14px}
+.result-row{min-height:82px;padding:23px 24px;border-radius:21px;grid-template-columns:72px minmax(0,1fr) 112px 24px}
+.result-row strong{font-size:24px}
+
+.credential-showcase{gap:22px}
+.credential-main{min-height:590px;border-radius:34px}
+.credential-side{gap:22px}
+.credential-small{padding:30px;border-radius:26px}
+.credential-small h3{font-size:23px;margin:10px 0}
+
+.price-grid,.review-wall{gap:22px}
+.price-card,.review-card{border-color:var(--card-border)}
+.price-card{padding:34px;border-radius:28px}
+.review-card{padding:31px;border-radius:28px}
+
+@media(max-width:1080px){
+  .hero-grid{grid-template-columns:1fr .86fr;gap:46px}
+  .hero-copy h1{font-size:clamp(54px,7vw,78px)}
+  .score-rail button{width:78px}
+}
+
+@media(max-width:960px){
+  .container{width:min(var(--content-max),calc(100% - 40px))}
+  .hero{padding:86px 0 72px}
+  .hero-grid{grid-template-columns:1fr;gap:58px}
+  .hero-copy{max-width:860px}
+  .hero-stage{min-height:590px;max-width:720px}
+  .results-layout{grid-template-columns:1fr}
+  .result-feature{min-height:440px}
+  .pain-grid{grid-template-columns:1fr 1fr}
+  .pain-grid article:last-child{grid-column:1/-1}
+}
+
+@media(max-width:720px){
+  .container{width:min(100% - 28px,var(--content-max))}
+  .nav{min-height:72px}
+  .brand{font-size:13px;max-width:72%}
+  .brand-mark{width:42px;height:42px;flex:0 0 auto}
+  .hero{padding:76px 0 58px;min-height:auto}
+  .hero-grid{gap:42px}
+  .hero-copy h1{font-size:clamp(42px,13vw,58px);line-height:.94;margin:16px 0 22px}
+  .hero-lead{font-size:17px;line-height:1.58}
+  .trust-tags{margin:24px 0;grid-template-columns:1fr 1fr}
+  .trust-tags span{min-height:50px;padding:10px 9px}
+  .button{min-height:56px}
+  .hero-stage{min-height:470px}
+  .portrait-card{inset:0 0 42px;border-radius:30px}
+  .portrait-badge-top{top:20px;right:10px}
+  .portrait-badge-bottom{left:10px;bottom:92px}
+  .score-rail{left:8px;right:8px;bottom:0;gap:7px}
+  .score-rail button{width:calc(25% - 5px);height:76px;border-radius:17px}
+  .score-rail strong{font-size:25px}
+  .section{padding:84px 0}
+  .section-head{margin-bottom:34px}
+  .section-head h2{font-size:clamp(34px,10.5vw,48px);line-height:1.01}
+  .pain-grid{grid-template-columns:1fr;gap:14px}
+  .pain-grid article,.pain-grid article:last-child{grid-column:auto;min-height:auto;padding:26px}
+  .pain-grid article h3{font-size:24px;margin:24px 0 10px}
+  .result-feature{min-height:390px;padding:28px}
+  .result-feature>strong{font-size:104px}
+  .result-row{grid-template-columns:54px minmax(0,1fr) auto;padding:19px 17px;gap:10px}
+  .result-row b{grid-column:2}.result-row i{grid-column:3;grid-row:1/3}
+  .credential-showcase{grid-template-columns:1fr}
+  .credential-main{min-height:500px}
+  .price-grid,.review-wall{grid-template-columns:1fr}
+  .price-card.featured{transform:none}
+}
+
+@media(max-width:420px){
+  .brand span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hero-copy h1{font-size:clamp(39px,12.8vw,50px)}
+  .trust-tags{grid-template-columns:1fr}
+  .hero-stage{min-height:430px}
+  .portrait-placeholder span{font-size:84px}
+  .score-rail button{height:72px}
+  .credential-main{min-height:440px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .pain-grid article,.result-row,.credential-main,.credential-small,.price-card,.review-card{transition:none!important}
+}
