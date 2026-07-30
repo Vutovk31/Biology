@@ -1,0 +1,92 @@
+/* Iteration 009 — premium mobile hierarchy, controls and responsive polish. */
+:root{
+  --mobile-gutter:clamp(18px,5vw,28px);
+  --tap-size:48px;
+}
+
+@media(max-width:720px){
+  body{overflow-x:hidden}
+  .container{width:min(100% - (var(--mobile-gutter) * 2),1180px)}
+
+  .header{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  .nav{min-height:72px;gap:14px}
+  .brand{gap:10px;min-width:0}
+  .brand-mark{flex:0 0 auto;box-shadow:0 10px 24px rgba(13,44,37,.14)}
+  .brand>span:last-child{white-space:normal;overflow-wrap:anywhere;font-weight:700;letter-spacing:-.015em}
+
+  .menu-button{min-width:var(--tap-size);min-height:var(--tap-size);border-radius:15px;border:1px solid rgba(23,63,53,.12);background:rgba(255,255,255,.78);box-shadow:0 10px 26px rgba(13,44,37,.09)}
+  .menu-button:active{transform:scale(.97)}
+  .nav nav{top:calc(100% + 10px);left:var(--mobile-gutter);right:var(--mobile-gutter);padding:12px;border-radius:22px;background:rgba(251,250,247,.98);transform-origin:top right}
+  .nav nav.open{animation:mobileMenuIn .24s cubic-bezier(.22,1,.36,1)}
+  .nav nav a{font-size:16px;font-weight:650;padding:13px 14px;border-radius:13px}
+  .nav nav .nav-cta{justify-content:center;margin-top:6px;background:var(--forest);color:#fff;box-shadow:0 12px 28px rgba(23,63,53,.2)}
+
+  .hero{padding-inline:0}
+  .hero-copy{max-width:100%}
+  .hero-copy .eyebrow{max-width:100%;white-space:normal;line-height:1.35}
+  .hero-copy h1{max-width:12ch;text-wrap:balance}
+  .hero-lead{max-width:34ch}
+  .trust-tags span{justify-content:flex-start}
+  .actions{display:grid;grid-template-columns:1fr}
+  .actions .button,.actions .text-button{min-height:var(--tap-size);justify-content:center}
+  .actions .button{font-size:16px;box-shadow:0 16px 34px rgba(23,63,53,.22)}
+  .actions .text-button{border:1px solid rgba(23,63,53,.12);border-radius:15px;background:rgba(255,255,255,.58)}
+  .disclaimer{font-size:12px;line-height:1.55}
+
+  .hero-stage{margin-top:2px}
+  .portrait-card{box-shadow:0 26px 70px rgba(10,42,34,.22)}
+  .portrait-placeholder{padding:26px 20px}
+  .portrait-placeholder strong{text-align:center}
+  .portrait-badge{line-height:1.35;box-shadow:0 14px 34px rgba(13,44,37,.12)}
+  .score-rail{margin-inline:calc(var(--mobile-gutter) * -1);padding-inline:var(--mobile-gutter)}
+  .score-rail button{min-height:76px;border-radius:18px}
+
+  .section-head{max-width:100%}
+  .section-head h2{max-width:13ch}
+  .section-head>p:last-child{max-width:38ch}
+
+  .pain-grid,.results-layout,.credential-showcase,.prices-grid,.reviews-grid{gap:14px}
+  .pain-grid article,.price-card,.review-card,.official article,.credential-small,.result-row{border-radius:20px}
+  .pain-grid article{padding:24px}
+  .pain-grid article a{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+
+  .result-feature{min-height:360px}
+  .result-feature>strong{line-height:.9}
+  .result-feature button{display:inline-flex;align-items:center;min-height:var(--tap-size);font-weight:700}
+  .result-row{min-height:76px;box-shadow:0 12px 34px rgba(18,55,46,.08)}
+  .result-row:active,.credential-main:active,.credential-small:active{transform:scale(.99)}
+
+  .credential-main{min-height:440px;overflow:hidden}
+  .credential-main>div{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .credential-main>div h3{font-size:24px;line-height:1.08}
+  .credential-small{padding:24px;min-height:156px}
+  .credential-small h3{font-size:21px;line-height:1.16}
+  .privacy-note{font-size:12px;line-height:1.55;padding-inline:4px}
+
+  .price-card a,.material-card a,.review-card button,.official a{min-height:var(--tap-size)}
+  .request form{border-radius:24px;padding:24px;box-shadow:0 24px 70px rgba(13,44,37,.14)}
+  .request input,.request select,.request textarea{min-height:var(--tap-size);font-size:16px;border-radius:14px}
+  .request textarea{min-height:120px}
+}
+
+@media(max-width:420px){
+  .nav nav{left:12px;right:12px}
+  .hero-copy h1{max-width:11ch}
+  .hero-lead{max-width:none}
+  .portrait-badge-top{right:-4px}
+  .portrait-badge-bottom{left:-6px}
+  .score-rail button{min-width:80px}
+  .result-row{grid-template-columns:44px 1fr auto 18px;padding:17px 14px}
+  .credential-main{min-height:410px}
+  .credential-main>div h3{font-size:22px}
+}
+
+@keyframes mobileMenuIn{
+  from{opacity:0;transform:translateY(-8px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .nav nav.open{animation:none}
+  .menu-button,.result-row,.credential-main,.credential-small{transition:none!important}
+}
