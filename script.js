@@ -16,9 +16,17 @@
     .progress-line article>span{top:6px;left:20px;border:1px solid rgba(255,255,255,.6);background:linear-gradient(145deg,var(--forest),var(--forest-2))}
     .progress-line h3{font-size:21px;margin-bottom:12px}.progress-line p{font-size:14px;line-height:1.65;margin:0;color:#5c6c66}
     .progress-line article:hover{transform:translateY(-8px);border-color:rgba(23,63,53,.2);box-shadow:0 28px 70px rgba(18,33,28,.12)}
+    .hero-stage,.result-feature,.credential-main,.price-card,.review-card{transform-style:preserve-3d;will-change:transform}
+    .hero-stage .portrait-card,.hero-stage .score-rail,.hero-stage .portrait-badge{transition:transform .55s cubic-bezier(.22,1,.36,1)}
+    .hero-stage.is-interactive .portrait-card{transform:perspective(1100px) rotateX(var(--tilt-y,0deg)) rotateY(var(--tilt-x,0deg)) translateZ(0)}
+    .hero-stage.is-interactive .score-rail{transform:translate3d(var(--shift-x,0px),var(--shift-y,0px),36px)}
+    .hero-stage.is-interactive .portrait-badge-top{transform:translate3d(calc(var(--shift-x,0px)*-.45),calc(var(--shift-y,0px)*-.45),42px)}
+    .hero-stage.is-interactive .portrait-badge-bottom{transform:translate3d(calc(var(--shift-x,0px)*.35),calc(var(--shift-y,0px)*.35),34px)}
+    .premium-hover{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s cubic-bezier(.22,1,.36,1)!important}
+    .premium-hover.is-hovered{box-shadow:0 30px 76px rgba(18,33,28,.16)!important}
     @media(max-width:960px){.progress-line{grid-template-columns:repeat(2,1fr)}.progress-line::before{display:none}.progress-line article:last-child{grid-column:1/-1;max-width:calc(50% - 9px)}}
     @media(max-width:720px){.progress-line{grid-template-columns:1fr;gap:14px;padding-left:18px}.progress-line::before{display:block;left:46px;right:auto;top:18px;bottom:18px;width:2px;height:auto}.progress-line article,.progress-line article:last-child{grid-column:auto;max-width:none;min-height:auto;padding:24px 20px 24px 78px}.progress-line article>span{top:22px;left:-1px;width:50px;height:50px}.progress-line article::after{font-size:44px}.progress-line article:hover{transform:none}}
-    @media(prefers-reduced-motion:reduce){.progress-line article{transition:none!important;transform:none!important}}
+    @media(prefers-reduced-motion:reduce){.progress-line article,.hero-stage *,.premium-hover{transition:none!important;transform:none!important}}
   `;
   document.head.appendChild(roadmapStyle);
 
@@ -135,6 +143,7 @@
   });
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
   const revealElements = document.querySelectorAll(".reveal");
 
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -149,6 +158,40 @@
     }, { threshold: 0.12, rootMargin: "0px 0px -70px" });
 
     revealElements.forEach(element => revealObserver.observe(element));
+  }
+
+  if (!prefersReducedMotion && finePointer) {
+    const heroStage = document.querySelector(".hero-stage");
+    if (heroStage) {
+      heroStage.classList.add("is-interactive");
+      heroStage.addEventListener("pointermove", event => {
+        const rect = heroStage.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        heroStage.style.setProperty("--tilt-x", `${x * 7}deg`);
+        heroStage.style.setProperty("--tilt-y", `${y * -7}deg`);
+        heroStage.style.setProperty("--shift-x", `${x * 18}px`);
+        heroStage.style.setProperty("--shift-y", `${y * 18}px`);
+      });
+      heroStage.addEventListener("pointerleave", () => {
+        ["--tilt-x", "--tilt-y", "--shift-x", "--shift-y"].forEach(name => heroStage.style.removeProperty(name));
+      });
+    }
+
+    document.querySelectorAll(".result-feature,.credential-main,.price-card,.review-card").forEach(card => {
+      card.classList.add("premium-hover");
+      card.addEventListener("pointermove", event => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${y * -3.5}deg) rotateY(${x * 3.5}deg) translateY(-5px)`;
+        card.classList.add("is-hovered");
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.removeProperty("transform");
+        card.classList.remove("is-hovered");
+      });
+    });
   }
 
   const sections = navLinks
@@ -204,6 +247,6 @@
       status.setAttribute("role", "status");
     }
 
-    track("lead_demo_saved", { goal: data.goal || "unknown" });
+    track("lead_demo_saved", { direction: data.direction || "unknown" });
   });
 })();
