@@ -1,0 +1,35 @@
+/* Premium evidence gallery — results, diplomas and mobile hierarchy. */
+.results,.credentials{isolation:isolate;overflow:hidden}
+.results::before,.credentials::before{content:"";position:absolute;pointer-events:none;border-radius:50%;filter:blur(2px);opacity:.7}
+.results::before{width:460px;height:460px;right:-220px;top:80px;background:radial-gradient(circle,rgba(217,180,94,.18),transparent 68%)}
+.credentials::before{width:520px;height:520px;left:-260px;bottom:-180px;background:radial-gradient(circle,rgba(47,113,95,.14),transparent 68%)}
+.results .container,.credentials .container{position:relative;z-index:1}
+.results-layout{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(18px,2.4vw,34px)}
+.result-feature{min-height:520px;border:1px solid rgba(255,255,255,.18)}
+.result-feature-top{align-items:center;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.result-feature-top b{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08)}
+.result-feature>strong{font-size:clamp(112px,10vw,154px);text-shadow:0 12px 40px rgba(0,0,0,.14)}
+.result-feature button{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 0 8px;transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.result-feature button:hover{opacity:.82;transform:translateX(4px)}
+.result-stack{align-content:stretch}
+.result-row{min-height:86px;padding:20px 24px;grid-template-columns:64px minmax(0,1fr) 100px 24px}
+.result-row span{letter-spacing:.12em}
+.result-row strong{letter-spacing:-.025em}
+.result-row i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(23,63,53,.07);transition:transform .3s var(--ease),background .3s var(--ease)}
+.result-row:hover i,.result-row:focus-visible i{transform:rotate(45deg);background:rgba(217,180,94,.26)}
+.credential-showcase{grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:clamp(18px,2.4vw,30px)}
+.credential-main{min-height:590px;border:1px solid rgba(23,63,53,.08)}
+.credential-main img{transition:transform .8s var(--ease),filter .8s var(--ease)}
+.credential-main:hover img,.credential-main:focus-visible img{transform:scale(1.035);filter:saturate(1.04) contrast(1.02)}
+.credential-main>div{padding:28px 30px}
+.credential-main h3{font-size:clamp(26px,2.2vw,34px)}
+.credential-side{gap:16px}
+.credential-small{min-height:174px;display:flex;flex-direction:column;justify-content:center;padding:28px 30px;border-color:rgba(23,63,53,.08)}
+.credential-small h3{margin:8px 0 10px;font-size:clamp(20px,1.7vw,26px)}
+.credential-small b{margin-top:auto;padding-top:12px;display:inline-flex;align-items:center;gap:8px}
+.privacy-note{display:inline-flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid rgba(23,63,53,.09);border-radius:999px;background:rgba(255,255,255,.56)}
+.privacy-note::before{content:"✓";display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--forest);color:#fff;font-size:11px;font-weight:900}
+@media(max-width:960px){.results-layout,.credential-showcase{grid-template-columns:1fr}.result-feature{min-height:430px}.credential-main{min-height:520px}.credential-side{grid-template-columns:repeat(3,1fr)}.credential-small{min-height:210px}}
+@media(max-width:720px){.results::before{width:320px;height:320px;right:-190px}.results-layout{gap:14px}.result-feature{min-height:380px}.result-feature>strong{font-size:108px}.result-row{min-height:76px;padding:18px 16px;grid-template-columns:48px minmax(0,1fr) 76px 22px;gap:10px}.result-row b{font-size:12px}.credential-main{min-height:460px}.credential-main>div{padding:21px}.credential-side{grid-template-columns:1fr}.credential-small{min-height:150px;padding:24px}.privacy-note{border-radius:18px;align-items:flex-start}}
+@media(max-width:420px){.result-feature{min-height:350px}.result-feature>strong{font-size:96px}.result-row{grid-template-columns:44px minmax(0,1fr) 64px 20px}.result-row strong{font-size:18px}.credential-main{min-height:420px}.credential-main h3{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.credential-main img,.result-feature button,.result-row i{transition:none!important}.credential-main:hover img,.credential-main:focus-visible img{transform:none}}
